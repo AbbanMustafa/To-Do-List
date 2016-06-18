@@ -19,30 +19,31 @@ Template.body.helpers({
       // If hide completed is checked, filter tasks
       return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: -1 } });
     }
-    // Otherwise, return all of the tasks
+    // Otherwise, return all of the tasksf
     // Show newest tasks at the top
     return Tasks.find({}, { sort: { createdAt: -1 } });
   },
 });
-Template.body.events({
-  'submit .new-task'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
 
-    // Get value from form element
-    const target = event.target;
-    const text = target.text.value;
 
-    // Insert a task into the collection
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-    });
+Template.body.events({ 'submit .new-task'(event)
+{
+  // Prevent default browser form submit
+  event.preventDefault();
 
-    // Clear form
-    target.text.value = '';
-  },
-  'change .hide-completed input'(event, instance) {
-     instance.state.set('hideCompleted', event.target.checked);
+  // Get value from form element
+  const target = event.target;
+  const text = target.text.value;
 
-});
+  // Insert a task into the collection
+  Tasks.insert({
+    text,
+    createdAt: new Date(), // current time
+  });
+
+  // Clear form
+  target.text.value = '';
+},
+'change .hide-completed input'(event, instance) {
+   instance.state.set('hideCompleted', event.target.checked);}
+ });
